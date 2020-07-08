@@ -9,8 +9,7 @@ jobs:
         
     steps:
       - checkout
-      - run: 
       - run: cd client; chmod +x ./gradlew; ./gradlew assembleRelease
       - store_artifacts:
-          path: ./app/build/outputs/apk
+          path: ./client/app/build/outputs/apk
           destination: apk
