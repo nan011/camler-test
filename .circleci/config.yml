@@ -6,10 +6,9 @@ orbs:
 jobs:
   build APK only:
     executor: android/android
-    filters:
-      branches:
-        only:
-          - staging
+    branches:
+      only:
+        - staging
     steps:
       - checkout
       - run: 
@@ -24,10 +23,9 @@ jobs:
 
   build APK and Bundle:
     executor: android/android
-    filters:
-      branches:
-        only:
-          - master
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - run:
