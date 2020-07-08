@@ -9,11 +9,8 @@ jobs:
         
     steps:
       - checkout
-      - run: ls
-      - run: cd client
-      - run: ls
-      - run: chmod +x ./gradlew
-      - run: ./gradlew assembleRelease
+      - run: 
+      - run: cd client; chmod +x ./gradlew; ./gradlew assembleRelease
       - store_artifacts:
           path: ./app/build/outputs/apk
           destination: apk
