@@ -15,5 +15,5 @@ jobs:
       - run: chmod +x ./gradlew
       - run: ./gradlew assembleRelease
       - store_artifact:
-        path: ./app/build/outputs/apk
-        destination: apk
+          path: ./app/build/outputs/apk
+          destination: apk
