@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+ android: circleci/android@0.2.0
+
+jobs:
+  build:
+    executor: android/android
+        
+    steps:
+      - checkout
+      - run: ls
+      - run: cd client
+      - run: ls
+      - run: chmod +x ./gradlew
+      - run: ./gradlew assembleRelease
+      - store_artifact:
+        path: ./app/build/outputs/apk
+        destination: apk
