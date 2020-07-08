@@ -6,9 +6,6 @@ orbs:
 jobs:
   build APK only:
     executor: android/android
-    branches:
-      only:
-        - staging
     steps:
       - checkout
       - run: 
@@ -23,9 +20,6 @@ jobs:
 
   build APK and Bundle:
     executor: android/android
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - run:
@@ -49,3 +43,19 @@ jobs:
       - store_artifacts:
           path: ./client/app/build/outputs/bundle
           destination: bundle
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build APK only:
+          filters:
+            branches:
+              only:
+                - staging
+
+      - build APK and Bundle:
+          filters:
+            branches:
+              only:
+                - master
