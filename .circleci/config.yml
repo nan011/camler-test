@@ -4,12 +4,50 @@ orbs:
  android: circleci/android@0.2.0
 
 jobs:
-  build:
+  build APK only:
     executor: android/android
-        
+    filters:
+      branches:
+        only:
+          - staging
     steps:
       - checkout
-      - run: cd client; chmod +x ./gradlew; ./gradlew assembleRelease
+      - run: 
+          name: Set gradlew to be executable file
+          command: cd client; chmod +x ./gradlew
+      - run:
+          name: Build APK
+          command: ./client/gradlew assembleBeta
       - store_artifacts:
           path: ./client/app/build/outputs/apk
           destination: apk
+
+  build APK and Bundle:
+    executor: android/android
+    filters:
+      branches:
+        only:
+          - master
+    steps:
+      - checkout
+      - run:
+          name: Set keystore.properties
+          command: cd ./client; echo "KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}\nKEYSTORE_KEY_ALIAS=${KEYSTORE_KEY_ALIAS}\nKEYSTORE_KEY_PASSWORD=${KEYSTORE_KEY_PASSWORD}" >> keystore.properties 
+      - run:
+          name: Set release.keystore
+          command: cd ./client/app; echo $KEYSTORE_FILE | base64 -d > release.keystore; ls
+      - run: 
+          name: Set gradlew to be executable file
+          command: cd client; chmod +x ./gradlew
+      - run:
+          name: Build APK
+          command: ./client/gradlew assembleRelease
+      - run:
+          name: Build Bundle
+          command: ./client/gradlew bundleRelease
+      - store_artifacts:
+          path: ./client/app/build/outputs/apk
+          destination: apk
+      - store_artifacts:
+          path: ./client/app/build/outputs/bundle
+          destination: bundle
