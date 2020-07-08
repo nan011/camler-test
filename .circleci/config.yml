@@ -10,4 +10,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: List
+          command: ls
+      - run:
+          name: Go inside to client directory
+          command: cd client
+      - run:
+          name: Set chmod of gradlew
+          command: chmod +x ./gradlew
+      - run:
+          name: Build APK
           command: ./gradlew build
+      - store_artifacts:
+          path: app/build/outputs/apk
+          destination: apk
