@@ -52,10 +52,10 @@ workflows:
           filters:
             branches:
               only:
-                - staging
+                - master
 
       - build APK and Bundle:
           filters:
             branches:
               only:
-                - master
+                - staging
