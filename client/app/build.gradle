@@ -42,7 +42,7 @@ android {
             signingConfig signingConfigs.release
         }
 
-        beta {
+        staging {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
