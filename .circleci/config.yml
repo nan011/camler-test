@@ -13,7 +13,7 @@ jobs:
           command: cd client; chmod +x ./gradlew
       - run:
           name: Build APK
-          command: ./client/gradlew assembleBeta
+          command: cd client; ./gradlew assembleBeta
       - store_artifacts:
           path: ./client/app/build/outputs/apk
           destination: apk
@@ -33,10 +33,10 @@ jobs:
           command: cd client; ls; chmod +x ./gradlew
       - run:
           name: Build APK
-          command: ./client/gradlew assembleRelease
+          command: cd client; ./gradlew assembleRelease
       - run:
           name: Build Bundle
-          command: ./client/gradlew bundleRelease
+          command: cd client; cd ./gradlew bundleRelease
       - store_artifacts:
           path: ./client/app/build/outputs/apk
           destination: apk
@@ -52,10 +52,10 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - staging
 
       - build APK and Bundle:
           filters:
             branches:
               only:
-                - staging
+                - master
