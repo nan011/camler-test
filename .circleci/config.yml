@@ -24,13 +24,13 @@ jobs:
       - checkout
       - run:
           name: Set keystore.properties
-          command: cd ./client; echo "KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}\nKEYSTORE_KEY_ALIAS=${KEYSTORE_KEY_ALIAS}\nKEYSTORE_KEY_PASSWORD=${KEYSTORE_KEY_PASSWORD}" >> keystore.properties 
+          command: cd ./client; echo "KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}\nKEYSTORE_KEY_ALIAS=${KEYSTORE_KEY_ALIAS}\nKEYSTORE_KEY_PASSWORD=${KEYSTORE_KEY_PASSWORD}" >> keystore.properties; cat keystore.properties
       - run:
           name: Set release.keystore
-          command: cd ./client/app; echo $KEYSTORE_FILE | base64 -d > release.keystore; ls
+          command: cd ./client/app; echo $KEYSTORE_FILE | base64 -d > release.keystore; cat release.keystore
       - run: 
           name: Set gradlew to be executable file
-          command: cd client; chmod +x ./gradlew
+          command: cd client; ls; chmod +x ./gradlew
       - run:
           name: Build APK
           command: ./client/gradlew assembleRelease
